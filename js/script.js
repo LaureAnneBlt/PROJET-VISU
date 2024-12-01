@@ -1,1 +1,2 @@
-document.getElementById('visualisation').innerText = "Données en cours de chargement...";
+document.getElementById("visualisation").innerText =
+  "Données en cours de chargement...";
