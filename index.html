@@ -1,153 +1,355 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Visualisation de Données</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Visualisation de Données</title>
 
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://d3js.org/topojson.v3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@d3/color-legend@1.0.0/dist/index.bundle.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.11/dist/plot.min.js"></script>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="https://d3js.org/topojson.v3.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@d3/color-legend@1.0.0/dist/index.bundle.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.11/dist/plot.min.js"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body class="text-gray-900">
-    <div class="grid grid-cols-5 mx-auto max-w-7xl place-items-center">
-      <div class="col-span-2">
-        <img
-          src="content/images/Picture1.png"
-          class="-rotate-35 drop-shadow-lg"
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet"
         />
-      </div>
-      <div class="col-span-3">
-        <h1
-          class="text-9xl font-bold font-lilita text-center mt-8 text-sky-300 drop-shadow-md"
-        >
-          GLOBAL PLASTIC WASTE
-        </h1>
-      </div>
-    </div>
-    <div class="custom-shape-divider-bottom-1732986071">
-      <svg
-        data-name="Layer 1"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1200 120"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-          class="shape-fill fill-sky-300"
-        ></path>
-      </svg>
-    </div>
-    <div class="bg-sky-300">
-      <div class="mx-auto max-w-7xl py-8">
-        <h1
-          class="text-8xl font-bold font-lilita text-white drop-shadow-md px-8"
-        >
-          INTRODUCTION
-        </h1>
-        <div
-          class="grid grid-cols-5 mx-auto max-w-7xl place-items-center pt-16"
-        >
-          <div class="col-span-3">
-            <p class="text-2xl font-roboto text-white">
-              Le problème mondial des déchets plastiques est devenu une
-              préoccupation majeure pour les gouvernements, les entreprises et
-              les citoyens. En 2023, la production de déchets plastiques a
-              atteint des niveaux alarmants, affectant l’environnement et la
-              santé publique. La gestion de ces déchets varie selon les pays, en
-              fonction de leurs infrastructures, de leur économie et de leur
-              sensibilisation aux enjeux écologiques.
-            </p>
-            <br />
-            <p class="text-2xl font-roboto text-white">
-              Dans ce projet, nous explorerons des données sur la production de
-              déchets plastiques en 2023, incluant la quantité produite par
-              pays, les sources de pollution, les taux de recyclage, la
-              production par habitant, et les risques pour les zones côtières.
-            </p>
-            <br />
-            <p class="text-2xl font-roboto text-white">
-              À travers des graphiques variés tels que des cartes géographiques,
-              des graphiques en secteurs (pie charts) et d'autres formes de
-              visualisation, ce projet mettra en lumière les tendances mondiales
-              et régionales de la gestion des déchets plastiques.
-            </p>
-          </div>
-          <div class="col-span-2">
-            <img src="content/images/Picture2.png" class="drop-shadow-lg" />
-          </div>
-        </div>
-      </div>
+        <link
+        href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap"
+        rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
 
-      <div class="mx-auto max-w-7xl pt-24">
-        <h1
-          class="text-8xl font-bold font-lilita text-white drop-shadow-md px-8 text-right"
-        >
-          PRINCIPALES SOURCES
-        </h1>
-        <div class="grid grid-cols-7 place-items-center py-16">
-          <div id="pie" class="col-span-4 drop-shadow-2xl"></div>
-          <div class="col-span-3">
-            <p class="text-2xl font-roboto text-white">
-              Dans le cadre de notre analyse des déchets plastiques mondiaux en
-              2023, nous avons examiné les principales industries responsables
-              de la production de plastique. À travers un graphique en
-              camembert, nous avons pu visualiser de manière claire et concise
-              les secteurs les plus grands contributeurs à la pollution
-              plastique. Les résultats montrent que les
-              <strong>emballages industriels</strong>,
-              <strong>les emballages pour les consommateurs</strong>, et
-              <strong>les biens de consommation</strong> sont les trois
-              principales sources de plastique dans le monde.
-            </p>
-          </div>
+    <body class="text-gray-900">
+
+        <div class="grid grid-cols-5 mx-auto max-w-7xl place-items-center">
+            <div class="col-span-2">
+                <img
+                src="content/images/Picture1.png"
+                class="-rotate-35 drop-shadow-lg"
+                />
+            </div>
+            <div class="col-span-3">
+                <h1 class="text-9xl font-bold font-lilita text-center mt-8 text-sky-300 drop-shadow-md">GLOBAL PLASTIC WASTE</h1>
+            </div>
         </div>
-        <h1
-          class="text-4xl font-bold font-lilita text-white drop-shadow-md px-8"
-        >
-          POURQUOI UN PIE CHART ?
-        </h1>
-        <p class="text-2xl font-roboto text-white">
-          Le graphique en camembert est particulièrement adapté pour représenter
-          ce type de données, car il permet de visualiser de façon intuitive la
-          proportion de chaque industrie dans la production totale de plastique.
-          En utilisant un camembert, nous pouvons rapidement identifier quelles
-          industries sont les plus responsables de la pollution plastique et
-          observer leurs parts relatives.
-        </p>
-        <script src="js/pie.js"></script>
-      </div>
+        <div class="custom-shape-divider-bottom-1732986071">
+            <svg
+                data-name="Layer 1"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1200 120"
+                preserveAspectRatio="none"
+            >
+                <path
+                d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                class="shape-fill fill-sky-300"
+                ></path>
+            </svg>
+        </div>
+
+
+    <div class="bg-sky-300">
+
+        <!-- INTRO -->
+
+        <div class="mx-auto max-w-7xl py-8">
+            <h1 class="text-8xl font-bold font-lilita text-white drop-shadow-md px-8">INTRODUCTION</h1>
+            <div class="grid grid-cols-5 mx-auto max-w-7xl place-items-center pt-16">
+                <div class="col-span-3">
+                    <p class="text-2xl font-roboto text-white">
+                    Le problème mondial des déchets plastiques est devenu une
+                    préoccupation majeure pour les gouvernements, les entreprises et
+                    les citoyens. En 2023, la production de déchets plastiques a
+                    atteint des niveaux alarmants, affectant l’environnement et la
+                    santé publique. La gestion de ces déchets varie selon les pays, en
+                    fonction de leurs infrastructures, de leur économie et de leur
+                    sensibilisation aux enjeux écologiques.
+                    </p>
+                    <br />
+                    <p class="text-2xl font-roboto text-white">
+                    Dans ce projet, nous explorerons des données sur la production de
+                    déchets plastiques en 2023, incluant la quantité produite par
+                    pays, les sources de pollution, les taux de recyclage, la
+                    production par habitant, et les risques pour les zones côtières.
+                    </p>
+                    <br />
+                    <p class="text-2xl font-roboto text-white">
+                    À travers des graphiques variés tels que des cartes géographiques,
+                    des graphiques en secteurs (pie charts) et d'autres formes de
+                    visualisation, ce projet mettra en lumière les tendances mondiales
+                    et régionales de la gestion des déchets plastiques.
+                    </p>
+                </div>
+                <div class="col-span-2">
+                    <img src="content/images/Picture2.png" class="drop-shadow-lg" />
+                </div>
+            </div>
+        </div>
+
+
+        <!-- DONNÉES -->
+
+        <div class="mx-auto max-w-7xl pt-24 pb-4">
+            <h1 class="text-8xl font-bold font-lilita text-white drop-shadow-md px-8 text-right">NOS DONNÉES</h1>
+            <div class="grid grid-cols-5 mx-auto max-w-7xl place-items-center pt-8 gap-4">
+                <div class="col-span-2">
+                    <img src="content/images/Picture3.png" class="drop-shadow-lg" />
+                </div>
+                <div class="col-span-3">
+                    <p class="text-2xl font-roboto text-white">
+                        Les données utilisées pour ce projet proviennent de Kaggle, 
+                        et offrent une analyse détaillée de la production et de la gestion 
+                        des déchets plastiques dans 165 pays pour l'année 2023. Il couvre plusieurs 
+                        aspects de la gestion des déchets plastiques, notamment les volumes de production, 
+                        les taux de recyclage et les évaluations des risques environnementaux liés aux 
+                        déchets côtiers. Ces informations permettent de mieux comprendre les défis mondiaux 
+                        posés par les déchets plastiques et les efforts déployés par les différents pays pour les gérer.
+                    </p>
+                </div>
+            </div>
+
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-16">
+                <table class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-xl text-sky-300 uppercase bg-slate-100 font-roboto">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Pays
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Production totale de plastique
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Source princpale
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Taux de recyclage
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-200 text-sky-700 font-medium text-lg">
+                            <th scope="row" class="px-6 py-4 bg-sky-200">
+                                Chine
+                            </th>
+                            <td class="px-6 py-4 bg-sky-100">
+                                59.08
+                            </td>
+                            <td class="px-6 py-4 bg-sky-200">
+                                Emballage industriel
+                            </td>
+                            <td class="px-6 py-4 bg-sky-100">
+                                29.8
+                            </td>
+                        </tr>
+                        <tr class="border-b border-gray-200 text-sky-700 font-medium text-lg">
+                            <th scope="row" class="px-6 py-4 bg-sky-200">
+                                États-Unis
+                            </th>
+                            <td class="px-6 py-4 bg-sky-100">
+                                42.02
+                            </td>
+                            <td class="px-6 py-4 bg-sky-200">
+                                Emballage Consommateurs
+                            </td>
+                            <td class="px-6 py-4 bg-sky-100">
+                                32.1
+                            </td>
+                        </tr>
+                        <tr class="border-b border-gray-200 text-sky-700 font-medium text-lg">
+                            <th scope="row" class="px-6 py-4 bg-sky-200">
+                                Inde
+                            </th>
+                            <td class="px-6 py-4 bg-sky-100">
+                                26.33
+                            </td>
+                            <td class="px-6 py-4 bg-sky-200">
+                                Biens de consommation
+                            </td>
+                            <td class="px-6 py-4 bg-sky-100">
+                                11.5
+                            </td>
+                        </tr>
+                        <tr class="border-b border-gray-200 text-sky-700 font-medium text-lg">
+                            <th scope="row" class="px-6 py-4 bg-sky-200">
+                                Japon
+                            </th>
+                            <td class="px-6 py-4 bg-sky-100">
+                                7.99
+                            </td>
+                            <td class="px-6 py-4 bg-sky-200">
+                                Emballage électronique
+                            </td>
+                            <td class="px-6 py-4 bg-sky-100">
+                                56.1
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-16 text-2xl font-roboto text-white">
+                <p>
+                    Ce jeu de données fournit des informations détaillées sur la gestion 
+                    des déchets plastiques dans différents pays pour l'année 2023. Les variables 
+                    présentes dans ce jeu de données sont de deux types principaux : nominales et 
+                    numériques, permettant une analyse quantitative et qualitative des déchets 
+                    plastiques produits par les pays.
+                </p>
+                <ul class="mt-8 list-disc pl-6">
+                    <li class="my-2"><strong>Pays (Nominale) :</strong> Le nom du pays pour lequel les données sont reportées.</li>
+                    <li class="my-2"><strong>Production totale de plastique (Numérique) :</strong> La quantité totale de déchets plastiques produits, exprimée en millions de tonnes (MT).</li>
+                    <li class="my-2"><strong>Source principale (Nominale) :</strong> Les principales sources de déchets plastiques dans le pays (ex. : emballages, biens de consommation, électronique, etc.).</li>
+                    <li class="my-2"><strong>Taux de recyclage (Numérique) :</strong> Le taux de recyclage national, exprimé en pourcentage (%).</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="custom-shape-divider-top-1733007681">
-      <svg
-        data-name="Layer 1"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1200 120"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-          class="shape-fill fill-sky-300"
-          transform="scale(1,-1) translate(0,-120)"
-        ></path>
-      </svg>
+        <svg
+          data-name="Layer 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+            class="shape-fill fill-sky-300"
+            transform="scale(1,-1) translate(0,-120)"
+          ></path>
+        </svg>
     </div>
 
-    <div id="chart" class="my-8"></div>
-    <script src="js/map.js"></script>
+
+    <!-- VISU 1 - PAYS PRODUISANT LE PLUS DE PLASTIQUE -->
+
+
+    <div class="mx-auto max-w-7xl pt-24">
+        <h1 class="text-8xl font-bold font-lilita text-sky-300 drop-shadow-md px-8 text-right">PAYS PRODUCTEURS</h1> 
+        <div class="grid grid-cols-7 place-items-center py-16 gap-8">
+            <div id="bubble" class="col-span-4 drop-shadow-2xl"></div>
+            <div class="col-span-3 p-8 rounded-3xl bg-sky-300 text-justify">
+                <p class="text-2xl font-roboto text-white">
+                    À partir des données collectées, nous pouvons observer que 
+                    <strong>la Chine</strong>,
+                    <strong>les États-Unis </strong>
+                    <strong>et l'Inde </strong>,
+                    figurent parmi les plus grands producteurs de 
+                    plastique, représentant une proportion significative des déchets mondiaux. 
+                    Ces pays sont en effet les plus grands consommateurs de plastiques dans le monde, 
+                    en raison de leur population élevée, de leur industrialisation avancée et de leur 
+                    forte consommation de produits plastiques.
+                </p>
+                <br>
+                <p class="text-2xl font-roboto text-white">
+                    Le bubble chart permet de visualiser de manière efficace cette hiérarchie 
+                    en termes de volume de déchets plastiques produits, en utilisant la taille 
+                    des bulles pour refléter l'ampleur de la production. Plus la taille de la bulle est grande, 
+                    plus le pays génère de plastique. Cette représentation graphique permet non seulement d’identifier 
+                    les pays principaux, mais aussi de saisir rapidement les différences de production entre eux.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- VISU 2 - INDUSTRIES PRODUISANT LE PLUS DE PLASTIQUE -->
+
+
+    <div class="mx-auto max-w-7xl pt-24">
+        <h1 class="text-8xl font-bold font-lilita text-sky-300 drop-shadow-md px-8">PRINCIPALES SOURCES</h1>
+        <div class="grid grid-cols-7 place-items-center py-16">
+            <div class="col-span-3">
+                <p class="text-2xl font-roboto text-sky-300">
+                    Dans le cadre de notre analyse des déchets plastiques mondiaux en
+                    2023, nous avons examiné les principales industries responsables
+                    de la production de plastique. À travers un graphique en
+                    camembert, nous avons pu visualiser de manière claire et concise
+                    les secteurs les plus grands contributeurs à la pollution
+                    plastique. Les résultats montrent que les
+                    <strong>emballages industriels</strong>,
+                    <strong>les emballages pour les consommateurs</strong>, et
+                    <strong>les biens de consommation</strong> sont les trois
+                    principales sources de plastique dans le monde.
+                </p>
+            </div>
+            <div id="pie" class="col-span-4 drop-shadow-2xl"></div>
+        </div>
+    </div>
+
+
+    <div class="custom-shape-divider-bottom-1732986071">
+        <svg
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+        >
+            <path
+            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+            class="shape-fill fill-sky-300"
+            ></path>
+        </svg>
+    </div>
+
+    <div class="bg-sky-300 pb-24">
+        <div class="mx-auto max-w-7xl pt-24">
+            <h1 class="text-8xl font-bold font-lilita text-white drop-shadow-md text-right">TAUX DE RECYCLAGE</h1>
+            <div class="grid grid-cols-5 place-items-center py-16">
+                <div class="col-span-2">
+                    <img
+                    src="content/images/Picture5.png"
+                    class="drop-shadow-lg w-4/5"
+                    />
+                </div>
+                <div class="col-span-3">
+                    <p class="text-2xl font-roboto text-white">
+                        Le bar chart présenté met en lumière les taux de recyclage 
+                        et de pollution plastique des 12 pays les plus pollueurs en matière 
+                        de déchets plastiques en 2023. Ce graphique révèle une tendance préoccupante : 
+                        certains des plus grands producteurs de déchets plastiques ont des taux de 
+                        recyclage faibles, ce qui aggrave leur impact environnemental. Par exemple, 
+                        des pays comme la Chine et les États-Unis montrent un écart significatif entre 
+                        la quantité de plastique qu'ils produisent et ce qu'ils parviennent à recycler.
+                    </p>
+                    <br>
+                    <p class="text-2xl font-roboto text-white">
+                        Cependant, il est intéressant de noter que le Japon fait figure d’exception dans 
+                        ce classement. En effet, il parvient à maintenir un certain équilibre entre sa production 
+                        de déchets plastiques et son taux de recyclage. 
+                    </p>
+                </div>
+            </div>
+            <p class="text-2xl font-roboto text-white">
+                Chaque barre représente un pays, avec une comparaison claire entre deux mesures 
+                clés : le taux de pollution plastique (mesuré par la production de déchets plastiques) 
+                et le taux de recyclage national. Ces deux métriques sont essentielles pour évaluer à la 
+                fois la contribution des pays à la crise mondiale des déchets plastiques et leurs efforts 
+                pour gérer cette situation. 
+            </p>
+            <div id="bar" class="drop-shadow-2xl mx-auto max-w-7xl mt-16 flex justify-center"></div>
+            <p class="text-4xl font-lilita text-white mt-4">Pourquoi un Bar Chart ?</p>
+            <p class="text-2xl font-roboto text-white mt-8">
+                Le choix d’un bar chart pour cette visualisation est particulièrement 
+                pertinent car il facilite la comparaison directe entre les deux variables 
+                (taux de pollution et taux de recyclage) pour chaque pays. Les barres juxtaposées 
+                permettent aux utilisateurs de repérer rapidement les disparités entre les taux de 
+                pollution plastique et de recyclage. Cette clarté rend le bar chart idéal pour analyser 
+                ces différences de manière concise et accessible, tout en permettant de tirer des conclusions 
+                visuelles claires.
+            </p>
+        </div>
+    </div>
+    
+    
+    
+    </div>
+
+    <script src="js/pie.js"></script>
+    <script src="js/bar.js"></script>
+    <script src="js/bubble.js"></script>
   </body>
 </html>
