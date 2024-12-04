@@ -111,8 +111,8 @@ d3.csv("../data/plastic_waste.csv")
         .attr("y", 10)
         .attr("dy", ".35em")
         .text(d.Main_Sources)
-        .style("fill", "white")
-        .style("font-size", "20px")
+        .style("fill", "#7dd3fc")
+        .style("font-size", "24px")
         .style("font-family", "Roboto, sans-serif");
     });
 
