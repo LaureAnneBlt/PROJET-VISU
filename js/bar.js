@@ -49,7 +49,7 @@ d3.csv("../data/plastic_waste.csv")
     const color = d3
       .scaleOrdinal()
       .domain(["totalPlasticWaste", "recyclingRate"])
-      .range(["#7dd3fc", "#fcd34d"]);
+      .range(["#f0f9ff", "#fcd34d"]);
 
     svg
       .append("g")
@@ -61,6 +61,7 @@ d3.csv("../data/plastic_waste.csv")
       .attr("transform", `translate(${margin.left},0)`)
       .call(d3.axisLeft(y).ticks(10))
       .selectAll("text")
+      .style("fill", "white")
       .style("font-size", "14px");
 
     svg
@@ -134,6 +135,7 @@ d3.csv("../data/plastic_waste.csv")
         .append("rect")
         .attr("width", 20)
         .attr("height", 20)
+        .attr("rx", 5)
         .attr("fill", color(item));
 
       legendItem
@@ -142,7 +144,9 @@ d3.csv("../data/plastic_waste.csv")
         .attr("y", 10)
         .attr("dy", ".35em")
         .text(item)
-        .style("font-size", "16px");
+        .style("font-size", "16px")
+        .style("font-family", "'Roboto', sans-serif")
+        .style("fill", "white");
     });
 
     svg
@@ -152,24 +156,29 @@ d3.csv("../data/plastic_waste.csv")
       .attr("text-anchor", "middle")
       .style("font-size", "24px")
       .style("font-weight", "bold")
+      .style("font-family", "'Roboto', sans-serif")
+      .style("fill", "white")
       .text("Plastic Waste and Recycling Rates by Country");
 
     svg
       .append("text")
       .attr("x", -height / 2)
-      .attr("y", margin.left / 3)
+      .attr("y", margin.left / 2)
       .attr("text-anchor", "middle")
       .attr("transform", "rotate(-90)")
       .style("font-size", "18px")
+      .style("font-family", "'Roboto', sans-serif")
+      .style("fill", "white")
       .text("Plastic Waste (MT)");
 
-    // Étiquette axe X
     svg
       .append("text")
       .attr("x", width / 2)
-      .attr("y", height - margin.bottom / 3)
+      .attr("y", height - margin.bottom / 2)
       .attr("text-anchor", "middle")
       .style("font-size", "18px")
+      .style("font-family", "'Roboto', sans-serif")
+      .style("fill", "white")
       .text("Country");
 
     svg
@@ -181,8 +190,9 @@ d3.csv("../data/plastic_waste.csv")
       .attr("y", height - margin.bottom + 15)
       .attr("text-anchor", "middle")
       .style("font-size", "12px")
+      .style("font-family", "'Roboto', sans-serif")
+      .style("fill", "white")
       .style("dominant-baseline", "middle")
-      .style("fill", "#333")
       .each(function (d) {
         const lines = wrapText(d.country, 10);
         const lineHeight = 14;
@@ -194,6 +204,20 @@ d3.csv("../data/plastic_waste.csv")
             .text(line);
         });
       });
+
+    svg
+      .selectAll(".y-axis-label")
+      .data(y.ticks(10))
+      .join("text")
+      .attr("class", "y-axis-label")
+      .attr("x", margin.left - 10)
+      .attr("y", (d) => y(d))
+      .attr("dy", "0.35em")
+      .attr("text-anchor", "end")
+      .style("font-size", "14px")
+      .style("font-family", "'Roboto', sans-serif")
+      .style("fill", "white")
+      .text((d) => d);
 
     svg.selectAll(".tick text").remove();
   })
