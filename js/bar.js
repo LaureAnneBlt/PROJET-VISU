@@ -63,7 +63,7 @@ d3.csv("../data/plastic_waste.csv")
       .selectAll("text")
       .style("fill", "white")
       .style("font-size", "14px");
-
+    
     svg
       .append("g")
       .attr("class", "grid")
@@ -76,6 +76,13 @@ d3.csv("../data/plastic_waste.csv")
       )
       .selectAll("line")
       .attr("stroke", "#ddd");
+    
+    svg.selectAll(".domain")
+      .style("stroke", "white");
+    
+    svg.selectAll(".tick line")
+      .style("stroke", "white");
+    
 
     function wrapText(text, maxWidth) {
       const words = text.split(" ");

@@ -7,31 +7,31 @@ d3.csv("../data/plastic_waste.csv")
         category.includes("Packaging_Industrial") ||
         category.includes("Industrial_Packaging")
       ) {
-        return "Emballage industriel";
+        return "Industrial Packaging";
       }
       if (
         category.includes("Packaging_Consumer") ||
         category.includes("Consumer_Packaging")
       ) {
-        return "Emballage Consommateurs";
+        return "Consumer Packaging";
       }
       if (
         category.includes("Packaging_Electronics") ||
         category.includes("Electronics_Packaging")
       ) {
-        return "Emballage électronique";
+        return "Electronics Packaging";
       }
       if (category.includes("Consumer_Goods")) {
-        return "Biens de consommation";
+        return "Consumer Goods";
       }
       if (category.includes("Automotive_Packaging")) {
-        return "Emballage automobile";
+        return "Automobile Packaging";
       }
       if (category.includes("Food_Packaging")) {
-        return "Emballage alimentaire";
+        return "Food Packaging";
       }
       if (category.includes("Industrial_Consumer")) {
-        return "Consommation industrielle";
+        return "Industrial Consumer";
       }
       return category;
     }
@@ -115,6 +115,16 @@ d3.csv("../data/plastic_waste.csv")
         .style("font-size", "24px")
         .style("font-family", "Roboto, sans-serif");
     });
+
+    svg.append("text")
+      .attr("x", width / 2)
+      .attr("y", height - 150)
+      .attr("text-anchor", "middle")
+      .style("font-size", "26px")
+      .style("font-family", "'Roboto', sans-serif")
+      .style("font-weight", "bold")
+      .style("fill", "red")
+      .text("Distribution of plastic waste production by country (in tonnes)");
 
     document.getElementById("pie").appendChild(svg.node());
   })

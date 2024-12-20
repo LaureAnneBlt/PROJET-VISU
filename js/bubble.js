@@ -91,10 +91,11 @@ d3.csv('../data/plastic_waste.csv').then(function(data) {
       .attr("x", width / 2)
       .attr("y", height + 30)
       .attr("text-anchor", "middle")
-      .style("font-size", "20px")
+      .style("font-size", "26px")
       .style("font-family", "'Roboto', sans-serif")
-      .style("fill", "white")
-      .text("Répartition de la production de déchets plastiques par pays (en tonnes)");
+      .style("font-weight", "bold")
+      .style("fill", "#7dd3fc")
+      .text("Distribution of plastic waste production by country (in tonnes)");
 
     document.getElementById("bubble").appendChild(svg.node());
 });
