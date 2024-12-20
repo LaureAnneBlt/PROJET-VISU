@@ -54,6 +54,7 @@ d3.csv("../data/plastic_waste.csv")
 
     const width = 900;
     const height = Math.min(width, 500);
+    // const height = 600;
 
     const color = d3
       .scaleOrdinal()
@@ -81,7 +82,8 @@ d3.csv("../data/plastic_waste.csv")
       .attr("width", width)
       .attr("height", height)
       .attr("viewBox", [-width / 3.5, -height / 2, width, height])
-      .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
+      .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;")
+
 
     const path = svg
       .append("g")
@@ -116,15 +118,15 @@ d3.csv("../data/plastic_waste.csv")
         .style("font-family", "Roboto, sans-serif");
     });
 
-    svg.append("text")
-      .attr("x", width / 2)
-      .attr("y", height - 150)
-      .attr("text-anchor", "middle")
-      .style("font-size", "26px")
-      .style("font-family", "'Roboto', sans-serif")
-      .style("font-weight", "bold")
-      .style("fill", "red")
-      .text("Distribution of plastic waste production by country (in tonnes)");
+    // svg.append("text")
+    //   .attr("x", width/5)
+    //   .attr("y", height/2)
+    //   .attr("text-anchor", "middle")
+    //   .style("font-size", "26px")
+    //   .style("font-family", "'Roboto', sans-serif")
+    //   .style("font-weight", "bold")
+    //   .style("fill", "red")
+    //   .text("Distribution of plastic waste production by country (in tonnes)");
 
     document.getElementById("pie").appendChild(svg.node());
   })
