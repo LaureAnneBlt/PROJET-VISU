@@ -1,4 +1,4 @@
-d3.csv("../data/plastic_waste.csv")
+d3.csv("data/plastic_waste.csv")
   .then(function (data) {
     const groupedData = {};
 
@@ -82,8 +82,7 @@ d3.csv("../data/plastic_waste.csv")
       .attr("width", width)
       .attr("height", height)
       .attr("viewBox", [-width / 3.5, -height / 2, width, height])
-      .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;")
-
+      .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
 
     const path = svg
       .append("g")

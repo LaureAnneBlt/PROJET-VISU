@@ -1,4 +1,4 @@
-d3.csv("../data/plastic_waste.csv")
+d3.csv("data/plastic_waste.csv")
   .then(function (data) {
     const countries = [
       "China",
@@ -12,7 +12,7 @@ d3.csv("../data/plastic_waste.csv")
       "United Kingdom",
       "Mexico",
       "Russia",
-      "Canada"
+      "Canada",
     ];
 
     const filteredData = data.filter((d) => countries.includes(d.Country));
@@ -20,7 +20,7 @@ d3.csv("../data/plastic_waste.csv")
     const finalData = filteredData.map((d) => ({
       country: d.Country,
       totalPlasticWaste: +d.Total_Plastic_Waste_MT,
-      recyclingRate: +d.Recycling_Rate
+      recyclingRate: +d.Recycling_Rate,
     }));
 
     const width = 1000;
@@ -63,33 +63,31 @@ d3.csv("../data/plastic_waste.csv")
       .selectAll("text")
       .style("fill", "white")
       .style("font-size", "14px");
-    
+
     svg
       .append("g")
       .attr("class", "grid")
       .attr("transform", `translate(${margin.left},0)`)
       .call(
-        d3.axisLeft(y)
+        d3
+          .axisLeft(y)
           .ticks(10)
           .tickSize(-width + margin.left + margin.right)
-          .tickFormat("")
+          .tickFormat(""),
       )
       .selectAll("line")
       .attr("stroke", "#ddd");
-    
-    svg.selectAll(".domain")
-      .style("stroke", "white");
-    
-    svg.selectAll(".tick line")
-      .style("stroke", "white");
-    
+
+    svg.selectAll(".domain").style("stroke", "white");
+
+    svg.selectAll(".tick line").style("stroke", "white");
 
     function wrapText(text, maxWidth) {
       const words = text.split(" ");
       let lines = [];
       let line = "";
 
-      words.forEach(word => {
+      words.forEach((word) => {
         if ((line + " " + word).length <= maxWidth) {
           line = line ? `${line} ${word}` : word;
         } else {
@@ -121,8 +119,9 @@ d3.csv("../data/plastic_waste.csv")
       .attr("class", "bar-recycling")
       .attr("x", (d) => x(d.country) + x.bandwidth() / 2)
       .attr("y", (d) => y((d.recyclingRate / 100) * d.totalPlasticWaste))
-      .attr("height", (d) =>
-        y(0) - y((d.recyclingRate / 100) * d.totalPlasticWaste)
+      .attr(
+        "height",
+        (d) => y(0) - y((d.recyclingRate / 100) * d.totalPlasticWaste),
       )
       .attr("width", x.bandwidth() / 2)
       .attr("rx", 5)
